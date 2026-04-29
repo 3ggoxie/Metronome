@@ -5,7 +5,6 @@ import enUS from './en-US';
 const savedLocale = localStorage.getItem('metronome-locale') || 'zh-CN';
 
 export const i18n = createI18n({
-  legacy: false,
   locale: savedLocale,
   fallbackLocale: 'en-US',
   messages: {

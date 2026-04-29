@@ -12,4 +12,7 @@ export default defineConfig({
       '@': resolve(__dirname, 'src'),
     },
   },
+  define: {
+    __VUE_I18N_LEGACY_API__: false,
+  },
 })
