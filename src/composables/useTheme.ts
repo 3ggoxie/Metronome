@@ -1,66 +1,47 @@
-import { ref, watch, onMounted } from 'vue';
+import { ref, watch } from 'vue';
 
-export type Theme = 'light' | 'dark' | 'system';
-export type ResolvedTheme = 'light' | 'dark';
+export type Theme = 'light' | 'dark';
 
-const getSystemTheme = (): ResolvedTheme => {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-};
-
-const saved = (localStorage.getItem('metronome-theme') || 'system') as Theme;
-const initial: Theme = ['light', 'dark', 'system'].includes(saved) ? saved : 'system';
+const saved = localStorage.getItem('metronome-theme') as Theme | null;
+const initial: Theme = saved === 'dark' ? 'dark' : 'light';
 
 const theme = ref<Theme>(initial);
-const resolved = initial === 'system' ? getSystemTheme() : (initial as ResolvedTheme);
-const resolvedTheme = ref<ResolvedTheme>(resolved);
+const resolvedTheme = ref<Theme>(initial);
 
-// Apply the resolved theme class synchronously
-if (resolved === 'dark') {
+if (initial === 'dark') {
   document.documentElement.classList.add('dark');
 } else {
   document.documentElement.classList.remove('dark');
 }
 
 export function useTheme() {
-  const resolveTheme = (): ResolvedTheme => {
-    if (theme.value === 'system') return getSystemTheme();
-    return theme.value;
-  };
-
-  const applyTheme = (r: ResolvedTheme) => {
-    const prev = resolvedTheme.value;
-    resolvedTheme.value = r;
-    if (r !== prev) {
-      if (r === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+  const applyTheme = (t: Theme) => {
+    resolvedTheme.value = t;
+    if (t === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
   };
 
   const setTheme = (newTheme: Theme) => {
     theme.value = newTheme;
     localStorage.setItem('metronome-theme', newTheme);
-    applyTheme(resolveTheme());
+    applyTheme(newTheme);
   };
 
-  onMounted(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', () => {
-      if (theme.value === 'system') {
-        applyTheme(getSystemTheme());
-      }
-    });
-  });
+  const toggleTheme = () => {
+    setTheme(theme.value === 'dark' ? 'light' : 'dark');
+  };
 
-  watch(theme, () => {
-    applyTheme(resolveTheme());
+  watch(theme, (t) => {
+    applyTheme(t);
   });
 
   return {
     theme,
     resolvedTheme,
     setTheme,
+    toggleTheme,
   };
 }

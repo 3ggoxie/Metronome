@@ -22,7 +22,7 @@ const emit = defineEmits<{
         >
           <Minus class="w-4 h-4 text-foreground" />
         </button>
-        <span class="text-5xl font-bold text-foreground w-20 text-center tracking-tight">{{ modelValue }}</span>
+        <span class="text-4xl sm:text-5xl font-bold text-foreground w-16 sm:w-20 text-center tracking-tight">{{ modelValue }}</span>
         <button
           type="button"
           class="w-9 h-9 rounded-full bg-muted hover:bg-zinc-300 dark:hover:bg-zinc-600 flex items-center justify-center transition-all hover:scale-105 active:scale-95"

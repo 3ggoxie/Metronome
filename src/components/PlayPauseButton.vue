@@ -13,7 +13,7 @@ defineEmits<{
 <template>
   <button
     type="button"
-    class="w-16 h-16 rounded-full bg-primary hover:bg-orange-600 transition-colors flex items-center justify-center"
+    class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary hover:bg-orange-600 transition-colors flex items-center justify-center"
     @click="$emit('toggle')"
   >
     <Pause v-if="isPlaying" class="w-7 h-7 text-white" :fill="'white'" />

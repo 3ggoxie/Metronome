@@ -30,11 +30,13 @@ export default {
     '5/4': '5/4',
     '7/8': '7/8',
   },
+  nav: {
+    metronome: 'Metronome',
+  },
   settings: {
     theme: 'Theme',
     dark: 'Dark',
     light: 'Light',
-    system: 'System',
   },
   bpm: {
     min: 20,

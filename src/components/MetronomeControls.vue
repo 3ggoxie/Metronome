@@ -26,7 +26,7 @@ defineEmits<{
 </script>
 
 <template>
-  <div class="glass-card p-6 sm:p-8 space-y-6 sm:space-y-8">
+  <div class="glass-card p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 md:space-y-8">
     <!-- Beat Indicator -->
     <BeatIndicator
       :beats="beatsPerMeasure"

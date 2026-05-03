@@ -30,11 +30,13 @@ export default {
     '5/4': '5/4',
     '7/8': '7/8',
   },
+  nav: {
+    metronome: '节拍器',
+  },
   settings: {
     theme: '主题',
     dark: '深色',
     light: '浅色',
-    system: '跟随系统',
   },
   bpm: {
     min: 20,
